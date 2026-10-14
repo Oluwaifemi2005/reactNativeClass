@@ -1,5 +1,5 @@
 
-import { Text, View, StyleSheet, Image, TextInput, ScrollView, Button, Alert, TouchableOpacity, Pressable, ActivityIndicator, FlatList } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, ScrollView, Button, Alert, TouchableOpacity, Pressable, ActivityIndicator, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,7 @@ const Item = ({data}) => {
 export default function Index() {
 
   const [count, setCount] = useState(0);
+  const [input, setInput] = useState("");
   const myData = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -76,7 +77,11 @@ useEffect(() => {
     // </View>
 
     // </ScrollView>
-    <View style={{width: '100%', height: '50%', backgroundColor:'beige'}}>
+
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+    <View style={{width: '100%', height: '100%', backgroundColor:'beige'}}>
       {/* <View style={{flex:1, backgroundColor: 'yellow'}}>
         <Text style={{color: 'green'}}>Up</Text>
       </View>
@@ -129,9 +134,28 @@ useEffect(() => {
         {/* <ActivityIndicator size='large' color='red'/> */}
 
         {/* <Image style={{width:200, height:200}} source={require("@/assets/images/icon.png")} alt="Cat" /> */}
+
+        
+        <TextInput className="rounded border mt-2 border-red-300 h-30"
+          autoCapitalize="characters"
+        />
+        <TextInput className="rounded border mt-2 border-red-300 h-30"
+          autoCapitalize="characters"
+          autoComplete="family-name"
+          autoCorrect= "false"
+        />
+        <TextInput className="rounded border mt-2 border-red-300 h-30"
+          autoCapitalize="characters"
+          autoComplete="given-name"
+          onChangeText={(myText) => setInput(myText)}
+          value={input}
+        />
+
+
         
 
     </View>
+        </KeyboardAvoidingView>
 
 
 
